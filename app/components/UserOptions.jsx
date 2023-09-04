@@ -8,17 +8,17 @@ export default function UserOptions() {
                 <div className="space-y-4">
                     <div className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
                         <Link href="/listar-ferramentas">
-                            Listar Ferramentas
+                            Ferramentas
                         </Link>
                     </div>
                     <div className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
                         <Link href="/listar-usuarios">
-                            Listar Usuários
+                            Usuários
                         </Link>
                     </div>
                     <div className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
                         <Link href="/listar-logs">
-                            Listar Logs
+                            Logs
                         </Link>
                     </div>
                 </div>
