@@ -11,16 +11,23 @@ export async function PUT(req, {params}){
 
     await connectDB();
 
-    const existingUser = await User.findOne({ codigo });
+    // Encontre o usuário que está sendo editado
+    const userEditado = await User.findById(id);
+
+    // Verifique se existe um usuário com o mesmo código, excluindo o usuário que está sendo editado
+    const existingUser = await User.findOne({ codigo, _id: { $ne: id } });
 
     if (!existingUser) {
-        const user = await User.findByIdAndUpdate(id, { nome, funcao, codigo, dataEditado});
-
-        if(!user) return NextResponse.json({message: "Usuário não encontrado!"}, {status: 404});
-        return NextResponse.json(user, {status: 200});
-    } else {
-        return NextResponse.json({message: "Usuário não foi editado pois já existe um com esse código!"}, {status: 509});
-    }
+        if (userEditado.codigo !== codigo || !existingUser) {
+          const user = await User.findByIdAndUpdate(id, { nome, funcao, codigo, dataEditado });
+          if (!user) return NextResponse.json({ message: "Usuário não encontrado!" }, { status: 404 });
+          return NextResponse.json(user, { status: 200 });
+        } else {
+          return NextResponse.json({ message: "Usuário não foi editado pois já existe um com esse código!" }, { status: 509 });
+        }
+      } else {
+        return NextResponse.json({ message: "Usuário não foi editado pois já existe um com esse código!" }, { status: 509 });
+      }
 }
 
 export async function GET(req, {params}){
