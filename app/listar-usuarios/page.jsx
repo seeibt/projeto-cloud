@@ -28,21 +28,7 @@ export default async function ListUsers(){
 
     return(
         <>
-            {users.map((user) => (
-                <div key={user._id} className="p-4 border border-slate-300 my-3 flex justify-between gap-5">
-                    <div>
-                        <h1 className="font-bold text-2xl"> {user.codigo} - {user.nome} </h1>
-                        <div className="">{user.funcao}</div>
-                    </div>
-
-                    <div className="flex gap-2 items-center">
-                        <RemoveBtn id={user._id}/>
-                        <Link href={`/editar-usuario/${user._id}`}>
-                            <HiPencilAlt size={24} />
-                        </Link>
-                    </div>
-                </div>
-            ))}
+            
         </>
     )
 }
