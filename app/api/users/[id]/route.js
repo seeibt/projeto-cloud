@@ -7,7 +7,7 @@ export async function PUT(req, {params}){
     const { id } = params;
     const { newNome: nome, newFuncao: funcao, newCodigo: codigo } = await req.json();
 
-    const dataEditado = new Date().toLocaleString('pt-BR');
+    const dataEditado = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
     await connectDB();
 

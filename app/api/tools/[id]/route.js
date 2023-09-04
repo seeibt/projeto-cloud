@@ -23,7 +23,7 @@ export async function PUT(req, {params}){
 
     const { id } = params;
     const { newNome: nome, newPosicao: posicao, tipoOperacao: tipoOperacao, codigoUsuario: codigoUsuario} = await req.json();
-    const dataOperacao = new Date().toLocaleString('pt-BR');
+    const dataOperacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
     const usuario = await User.findOne({codigo: codigoUsuario}); // Busca o usuário pelo código
 

@@ -6,7 +6,7 @@ export async function POST(req){
     const { nome, posicao} = await req.json();
 
     await connectDB();
-    await Tools.create({ nome, posicao, dataOperacao: new Date().toLocaleString('pt-BR') });
+    await Tools.create({ nome, posicao, dataOperacao: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }) });
 
     return NextResponse.json({message: "Ferramenta criada com sucesso!"}, {status: 201});
 }

@@ -4,7 +4,7 @@ import User from "@/models/user";
 
 export async function POST(req){
     const { nome, funcao, codigo } = await req.json();
-    const data = new Date().toLocaleString('pt-BR')
+    const data = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
     await connectDB();
     const existingUser = await User.findOne({ codigo });
