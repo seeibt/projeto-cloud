@@ -28,10 +28,8 @@ export default async function ListTools(){
 
     return (
         <>
-          {tools.length === 0 ? (
-            <div className="text-red-500 font-semibold">Nenhuma ferramenta cadastrada.</div>
-          ) : (
-            tools.map((tool) => (
+          {tools && tools.length > 0 ? (
+             tools.map((tool) => (
               <div key={tool._id} className="p-4 border border-slate-300 my-3 flex justify-between gap-5">
                 <div>
                   <h1 className="font-bold text-2xl">{tool.nome}</h1>
@@ -54,6 +52,8 @@ export default async function ListTools(){
                 </div>
               </div>
             ))
+          ) : (
+            <div className="text-red-500 font-semibold">Nenhuma ferramenta cadastrada.</div>
           )}
         </>
       );
