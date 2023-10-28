@@ -12,7 +12,7 @@ export default function RemoveBtn({ id }) {
         const confirmed = confirm("Tem certeza que deseja remover esta ferramenta?")
 
         if(confirmed){
-            const res = await fetch(`${apiUrl}/api/tools?id=${id}`, {
+            const res = await fetch(`https://main--incomparable-cobbler-553924.netlify.app/api/tools?id=${id}`, {
                 method: 'DELETE',
             })
             if(res.ok){
