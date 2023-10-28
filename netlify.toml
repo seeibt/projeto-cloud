@@ -1,6 +1,7 @@
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
   for = "/*"
+  Access-Control-Allow-Origin: https://localhost:3000
 
   [headers.values]
     X-Frame-Options = "DENY"
