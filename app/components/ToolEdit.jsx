@@ -14,7 +14,7 @@ export default function EditarFerramenta({ id, nome, posicao }){
         const apiUrl = process.env.API_URL
 
         try {
-            const res = await fetch(`${apiUrl}/api/tools/${id}`, {
+            const res = await fetch(`/api/tools/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
