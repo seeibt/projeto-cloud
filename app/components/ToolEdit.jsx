@@ -9,17 +9,9 @@ export default function EditarFerramenta({ id, nome, posicao }){
     const [newPosicao, setNewPosicao] = useState(posicao)
     const Router = useRouter();
 
-    const cors = require("cors")
-    app.use(cors());
-
-    app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*")
-    })
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const apiUrl = process.env.API_URL
-
 
         try {
             const res = await fetch(`${apiUrl}/api/tools/${id}`, {
