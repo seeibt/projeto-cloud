@@ -15,7 +15,7 @@ export default function EditarFerramenta({ id, nome, posicao }){
 
 
         try {
-            const res = await fetch(`https://data.mongodb-api.com/app/data-eeztq/endpoint/data/v1/api/tools/${id}`, {
+            const res = await fetch(`/api/tools/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
