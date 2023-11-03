@@ -15,7 +15,7 @@ export default function EditarUsuario({ id, nome, funcao, codigo }){
         e.preventDefault();
 
         try {
-            const res = await fetch(`/api/users/${id}`, {
+            const res = await fetch(`https://main--incomparable-cobbler-553924.netlify.app/api/users/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -26,6 +26,7 @@ export default function EditarUsuario({ id, nome, funcao, codigo }){
                 if(res.ok){
                     alert("Usuário editado com sucesso!");
                     Router.push("/listar-usuarios");
+                    Router.refresh();
                     return;
                 }else{
                     if(res.status == 509){

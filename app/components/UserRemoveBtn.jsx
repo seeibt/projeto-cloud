@@ -9,8 +9,8 @@ export default function RemoveBtn({ id }) {
     const removeUser = async () => {
         const confirmed = confirm("Tem certeza que deseja remover este usuário?")
 
-        if(confirm){
-            const res = await fetch(`/api/users?id=${id}`, {
+        if(confirmed){
+            const res = await fetch(`https://main--incomparable-cobbler-553924.netlify.app/api/users?id=${id}`, {
                 method: 'DELETE',
             })
             if(res.ok){

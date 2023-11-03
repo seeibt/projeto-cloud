@@ -11,18 +11,15 @@ export default function EditarFerramenta({ id, nome, posicao }){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiUrl = process.env.API_URL
 
         try {
-            const res = await fetch(`/api/tools/${id}`, {
+            const res = await fetch(`https://main--incomparable-cobbler-553924.netlify.app/api/tools/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ newNome, newPosicao })
                 })
-
-                console.log(res)
 
                 if(res.ok){
                     alert("Ferramenta editada com sucesso!");

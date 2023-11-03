@@ -15,7 +15,7 @@ export default function EditarFerramenta({ id, nome, posicao }){
         e.preventDefault();
 
         try {
-            const res = await fetch(`/api/tools/${id}`, {
+            const res = await fetch(`https://main--incomparable-cobbler-553924.netlify.app/api/tools/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
