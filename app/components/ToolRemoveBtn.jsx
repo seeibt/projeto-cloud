@@ -14,9 +14,6 @@ export default function RemoveBtn({ id }) {
         if(confirmed){
             const res = await fetch(`https://main--incomparable-cobbler-553924.netlify.app/api/tools?id=${id}`, {
                 method: 'DELETE',
-                headers: {
-                   "Access-Control-Allow-Origin": "*",
-                }
             },)
             if(res.ok){
                 router.refresh();
