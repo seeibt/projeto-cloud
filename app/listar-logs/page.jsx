@@ -21,6 +21,10 @@ const getLogs = async () => {
 export default async function ListLogs(){
 
     let logs = await getLogs()
+
+    if(!logs){
+        return <div>Nenhum log encontrado.</div>
+    }
     
     const logComponent = logs.map((log) => {
         const ferramenta = JSON.parse(log.ferramenta)
