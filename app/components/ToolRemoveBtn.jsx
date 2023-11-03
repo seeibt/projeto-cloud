@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation"
 export default function RemoveBtn({ id }) {
 
     const router = useRouter();
-    const apiUrl = process.env.API_URL
 
     const removeTools = async () => {
         const confirmed = confirm("Tem certeza que deseja remover esta ferramenta?")

@@ -21,7 +21,7 @@ export async function GET(){
    
     await connectDB();
 
-    const users = await User.find({});
+    const users = await User.find({}).sort({codigo: 1}).exec();
 
     return NextResponse.json(users, {status: 200});
 }

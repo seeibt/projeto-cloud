@@ -17,7 +17,7 @@ export default function UserAdd() {
         if(!nome || !funcao || !codigo) return alert("Preencha todos os campos!");
 
         try {
-            const res = await fetch ('/api/users', {
+            const res = await fetch ('https://main--incomparable-cobbler-553924.netlify.app/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -27,7 +27,8 @@ export default function UserAdd() {
 
                 if(res.ok){
                     router.push("/listar-usuarios");
-                    alert("Usuário adicionado com sucesso! Basta recarregar a página para visualizá-lo.");
+                    router.refresh();
+                    alert("Usuário adicionado com sucesso!");
                     return;
                 }else{
                     throw new Error("Não foi possível adicionar o usuário!");

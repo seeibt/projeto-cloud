@@ -15,7 +15,7 @@ export default function ToolsAdd() {
         if(!nome || !posicao) return alert("Preencha todos os campos!");
 
         try {
-            const res = await fetch ('/api/tools', {
+            const res = await fetch ('https://main--incomparable-cobbler-553924.netlify.app/api/tools', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
