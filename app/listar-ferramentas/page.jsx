@@ -80,7 +80,7 @@ export default async function ListTools(){
               </div>
             ))
           ) : (
-            <div className="text-red-500 font-semibold">Nenhuma ferramenta cadastrada.</div>
+            <div className="text-red-500 font-semibold">Nenhuma ferramenta cadastrada!</div>
           )}
         </>
       );
