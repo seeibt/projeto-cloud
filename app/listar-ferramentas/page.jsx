@@ -5,16 +5,39 @@ import { HiPencilAlt, HiArrowNarrowUp, HiArrowNarrowDown } from 'react-icons/hi'
 const getTools = async () => {
     const apiUrl = process.env.API_URL
 
-    try{
-        const res = await fetch(`${apiUrl}/api/tools`, {
-            cache: 'no-store',
-        })
+    try{     
+        const toolsRes = await fetch(`${apiUrl}/api/tools`, {
+          cache: 'no-store',
+        });
 
-        if(!res.ok){
-            throw new Error('Failed to fetch tools')
+        if (!toolsRes.ok) {
+          throw new Error('Failed to fetch tools');
         }
 
-        return res.json()
+        const tools = await toolsRes.json();
+
+        // Realize uma segunda solicitação para obter os logs
+        const logsRes = await fetch(`${apiUrl}/api/logs`, {
+          cache: 'no-store',
+        });
+
+        if (!logsRes.ok) {
+          throw new Error('Failed to fetch logs');
+        }
+
+        const logs = await logsRes.json();
+
+        // Agora você pode verificar se cada ferramenta está no painel com base nos dados dos logs
+        const toolsWithStatus = tools.map(tool => {
+          return {
+              ...tool,
+              ...logs.find(log => log.ferramenta._id === tool._id)
+          };
+        });
+
+        console.log(toolsWithStatus)
+
+        return toolsWithStatus;
 
     } catch(err){
         console.log(err)
@@ -26,6 +49,10 @@ export default async function ListTools(){
 
     let tools = await getTools()
 
+    if(!tools){
+        return <div className="text-red-500 font-semibold">Nenhuma ferramenta cadastrada.</div>
+    }
+
     return (
         <>
           {tools && tools.length > 0 ? (
@@ -34,7 +61,7 @@ export default async function ListTools(){
                 <div>
                   <h1 className="font-bold text-2xl">{tool.nome}</h1>
                   <div className="">
-                    {tool.posicao} Data: {tool.dataOperacao}
+                    {tool.posicao} Data: {tool.dataOperacao} {tool.tipoOperacao == 'Devolução' || !tool.tipoOperacao ? <span className="text-green-500"> - Disponível</span> : <span className="text-red-500"> - Indisponível</span>}
                   </div>
                 </div>
       

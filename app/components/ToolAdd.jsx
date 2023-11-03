@@ -26,6 +26,7 @@ export default function ToolsAdd() {
                 if(res.ok){
                     alert("Ferramenta adicionada com sucesso!");
                     router.push("/listar-ferramentas");
+                    router.refresh();
                     return;
                 }else{
                     throw new Error("Não foi possível adicionar a ferramenta!");

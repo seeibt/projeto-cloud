@@ -26,6 +26,10 @@ export default async function ListUsers(){
 
     let users = await getUsers()
 
+    if(!users){
+        return <div className="text-red-500 font-semibold">Nenhum usuário cadastrado.</div>
+    }
+
     return(
         <>
             {users && users.length > 0 ? (
