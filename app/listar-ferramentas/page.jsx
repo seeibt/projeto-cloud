@@ -35,8 +35,6 @@ const getTools = async () => {
           };
         });
 
-        console.log(toolsWithStatus)
-
         return toolsWithStatus;
 
     } catch(err){
