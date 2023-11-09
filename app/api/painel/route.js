@@ -6,16 +6,34 @@ export async function GET(){
    
     await connectDB();
 
-    const tools = await Tools.find({});
-
-    return NextResponse.json(tools, {status: 200});
+    return NextResponse.json("Sim, ta funcionando!", {status: 200});
 }
+export async function POST(req) {
+    try {
+        const { body } = await req.json();
+        
+        // Depure o conteúdo da requisição
+        console.log('Conteúdo da requisição:', body);
 
-export async function POST(req){
+        // Acessando o valor 'posicao' do JSON
+        const posicao = body.posicao;
 
-    const body = await req.json();
+        console.log('Posição:', posicao);
+        
+        // Faça o que você precisa com os dados
+        
+        // Retorne uma resposta, se necessário
+        return {
+            status: 200, // Código de status HTTP 200 (OK)
+            body: JSON.stringify({ message: 'Requisição POST recebida com sucesso' })
+        };
+    } catch (error) {
+        console.error('Erro ao analisar o corpo da requisição:', error);
 
-    console.log(body)
-    //fazer aqui o put pra ferramentas e lá dentro já faz o registro do log
-
+        // Retorne uma resposta de erro, se necessário
+        return {
+            status: 400, // Código de status HTTP 400 (Bad Request)
+            body: JSON.stringify({ error: 'Erro ao analisar o corpo da requisição' })
+        };
+    }
 }
