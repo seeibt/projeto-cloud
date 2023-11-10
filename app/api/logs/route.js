@@ -5,7 +5,6 @@ import Log from "@/models/log";
 export async function GET(){
    
     await connectDB();
-    //find que posição seja igual ao parametro
 
     const logs = await Log.find({});
 

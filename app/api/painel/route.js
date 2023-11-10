@@ -1,6 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 import connectDB from "../../../libs/mongodb";
-import { Tools, User } from "@/models/tools";
+import Tools from "@/models/tools";
+import User from "@/models/user";
+import Log from "@/models/log";
 
 export async function GET(){
    
@@ -9,22 +11,42 @@ export async function GET(){
     return NextResponse.json("Sim, ta funcionando!", {status: 200});
 }
 
+function registrarLog(tipo, ferramenta, tipoOperacao, dataOperacao, usuario) {
+
+    const log = new Log({
+        tipo: tipo,
+        ferramenta: JSON.stringify(ferramenta), // Converter o objeto para string
+        tipoOperacao: tipoOperacao,
+        dataOperacao: dataOperacao,
+        usuario: JSON.stringify(usuario),
+    });
+
+    log.save();
+}
+
 export async function POST(req) {
+
     await connectDB();
 
     const body = await req.json();
-    const posicao = body.posicao;
-    const codigo = body.codigo;
 
-    console.log('Posição:', posicao);
-    console.log('Código:', codigo);
+    console.log('Posição:', body.posicao);
+    console.log('Código:', body.codigo);
 
-    const tool = await Tools.findOne({ posicao: posicao });
+    const ferramenta = await Tools.findOne({posicao: body.posicao}); // Busca a ferramenta pela posição
+    const id = ferramenta.id;
+    const tipoOperacao = body.tipoOperacao;
+
+    const dataOperacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+
+    const tool = await Tools.findByIdAndUpdate(id, { dataOperacao, tipoOperacao});
+    const usuario = await User.findOne({ codigo: body.codigo }); // Busca o usuário pelo código  
+
+    console.log('Usuário encontrado:', usuario);
+    console.log('Ferramenta encontrada:', tool);
+
+    registrarLog('PUT', tool, tipoOperacao, dataOperacao, usuario);
+
+    return NextResponse.json({message: "Requisição concluída com sucesso!"}, {status: 201});
     
-    const user = await User.findOne({ codigo: codigo });
-
-    console.log("Ferramenta: ", tool);
-    console.log("Usuario: ", user);
-
-    return NextResponse.text('Requisição POST recebida com sucesso', { status: 200 });
 }
