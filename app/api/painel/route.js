@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import connectDB from "../../../libs/mongodb";
-import Tools from "@/models/tools";
+import { Tools, User } from "@/models/tools";
 
 export async function GET(){
    
@@ -8,32 +8,23 @@ export async function GET(){
 
     return NextResponse.json("Sim, ta funcionando!", {status: 200});
 }
+
 export async function POST(req) {
-    try {
-        const { body } = await req.json();
-        
-        // Depure o conteúdo da requisição
-        console.log('Conteúdo da requisição:', body);
+    await connectDB();
 
-        // Acessando o valor 'posicao' do JSON
-        const posicao = body.posicao;
+    const body = await req.json();
+    const posicao = body.posicao;
+    const codigo = body.codigo;
 
-        console.log('Posição:', posicao);
-        
-        // Faça o que você precisa com os dados
-        
-        // Retorne uma resposta, se necessário
-        return {
-            status: 200, // Código de status HTTP 200 (OK)
-            body: JSON.stringify({ message: 'Requisição POST recebida com sucesso' })
-        };
-    } catch (error) {
-        console.error('Erro ao analisar o corpo da requisição:', error);
+    console.log('Posição:', posicao);
+    console.log('Código:', codigo);
 
-        // Retorne uma resposta de erro, se necessário
-        return {
-            status: 400, // Código de status HTTP 400 (Bad Request)
-            body: JSON.stringify({ error: 'Erro ao analisar o corpo da requisição' })
-        };
-    }
+    const tool = await Tools.findOne({ posicao: posicao });
+    
+    const user = await User.findOne({ codigo: codigo });
+
+    console.log("Ferramenta: ", tool);
+    console.log("Usuario: ", user);
+
+    return NextResponse.text('Requisição POST recebida com sucesso', { status: 200 });
 }
