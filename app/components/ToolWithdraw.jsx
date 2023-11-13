@@ -20,7 +20,7 @@ export default function EditarFerramenta({ id, nome, posicao }){
                 headers: {
                     'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ newNome, newPosicao, tipoOperacao, codigoUsuario })
+                    body: JSON.stringify({ newNome, newPosicao, tipoOperacao })
                 })
 
                 if(res.ok){
