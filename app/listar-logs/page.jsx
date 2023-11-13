@@ -31,7 +31,7 @@ export default async function ListLogs(){
         const usuario = JSON.parse(log.usuario)
 
         if(!ferramenta || !usuario){
-            return <div>Nenhum log encontrado.</div>
+            return
         }
 
         return(
