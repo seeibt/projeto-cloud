@@ -30,6 +30,10 @@ export default async function ListLogs(){
         const ferramenta = JSON.parse(log.ferramenta)
         const usuario = JSON.parse(log.usuario)
 
+        if(!ferramenta || !usuario){
+            return <div>Nenhum log encontrado.</div>
+        }
+
         return(
             <div key={log._id} className="p-4 border border-slate-300 my-3 flex justify-between gap-5">
                 <div>
