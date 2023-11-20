@@ -27,7 +27,6 @@ function registrarLog(tipo, ferramenta, tipoOperacao, dataOperacao, usuario) {
 }
 
 async function registrarRetirada(tool, dataOperacao) {
-    // Register log
     const log = new Log({
         tipo: 'POST',
         ferramenta: JSON.stringify(tool),
@@ -38,9 +37,8 @@ async function registrarRetirada(tool, dataOperacao) {
 
     await log.save();
 
-    // Send email
     const transporter = nodemailer.createTransport({
-        service: 'gmail', // e.g., 'gmail', 'yahoo', etc.
+        service: 'gmail',
         auth: {
             type: 'OAuth2',
             user: 'logautopecasmuller@gmail.com',
@@ -53,8 +51,7 @@ async function registrarRetirada(tool, dataOperacao) {
 
     const mailOptions = {
         from: 'logautopecasmuller@gmail.com',
-        //to many emails
-        to: 'seibteduardo@gmail.com; amguto47@gmail.com; victorwelter2003@gmail.com; rauberimports@gmail.com;',
+        to: 'seibteduardo@gmail.com; amguto47@gmail.com; victorwelter2003@gmail.com;',
         subject: 'Ferramenta retirada sem autenticação!',
         text: 'A ferramenta com o nome ' + tool.nome + ' foi retirada sem autenticação às ' + dataOperacao + '!',
     };
