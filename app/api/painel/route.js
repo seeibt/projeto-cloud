@@ -51,7 +51,7 @@ async function registrarRetirada(tool, dataOperacao) {
 
     const mailOptions = {
         from: 'logautopecasmuller@gmail.com',
-        to: 'seibteduardo@gmail.com; amguto47@gmail.com; victorwelter2003@gmail.com;',
+        to: 'seibteduardo@gmail.com; amguto47@gmail.com; victorwelter2003@gmail.com; eriquewillers@gmail.com; angelodalzotto97@gmail.com',
         subject: 'Ferramenta retirada sem autenticação!',
         text: 'A ferramenta com o nome ' + tool.nome + ' foi retirada sem autenticação às ' + dataOperacao + '!',
     };
