@@ -76,7 +76,7 @@ export async function POST(req) {
     if(!ferramenta){
         return NextResponse.json({message: "Ferramenta não encontrada!"}, {status: 203});
     }
-    
+
     // Busca a ferramenta pela posição
     const id = ferramenta.id;
     const tipoOperacao = body.tipoOperacao;
@@ -91,6 +91,10 @@ export async function POST(req) {
         registrarRetirada(tool, dataOperacao);
     } else {
         const usuario = await User.findOne({ codigo: body.codigo }); 
+
+        if(!usuario){
+            return NextResponse.json({message: "Usuário não encontrado!"}, {status: 203});
+        }
 
         registrarLog('POST', tool, tipoOperacao, dataOperacao, usuario);
     }
