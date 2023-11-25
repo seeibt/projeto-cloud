@@ -71,13 +71,21 @@ export async function POST(req) {
 
     const body = await req.json();
 
-    const ferramenta = await Tools.findOne({posicao: body.posicao}); // Busca a ferramenta pela posição
+    const ferramenta = await Tools.findOne({posicao: body.posicao});
+
+    if(!ferramenta){
+        return NextResponse.json({message: "Ferramenta não encontrada!"}, {status: 203});
+    }
+    
+    // Busca a ferramenta pela posição
     const id = ferramenta.id;
     const tipoOperacao = body.tipoOperacao;
 
     const dataOperacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
     const tool = await Tools.findByIdAndUpdate(id, { dataOperacao, tipoOperacao});
+
+    
 
     if(!body.codigo && tipoOperacao == 'Retirada'){
         registrarRetirada(tool, dataOperacao);
