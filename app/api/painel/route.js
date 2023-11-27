@@ -87,11 +87,11 @@ export async function POST(req) {
     const usuario = await User.findOne({ codigo: body.codigo });
 
     if(!usuario && tipoOperacao == 'Retirada'){
-        registrarRetirada(tool, dataOperacao);
+        await registrarRetirada(tool, dataOperacao);
 
         return NextResponse.json({message: "Usuário não encontrado!"}, {status: 403});
     } else {
-        registrarLog('POST', tool, tipoOperacao, dataOperacao, usuario);
+        await registrarLog('POST', tool, tipoOperacao, dataOperacao, usuario);
     }
 
     return NextResponse.json({message: "Requisição concluída com sucesso!"}, {status: 201});
