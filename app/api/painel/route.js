@@ -79,11 +79,11 @@ export async function POST(req) {
 
     const tool = await Tools.findByIdAndUpdate(id, { dataOperacao, tipoOperacao});
 
-    if(!body.codigo && tipoOperacao == 'Retirada'){
+    const usuario = await User.findOne({ codigo: body.codigo });
+
+    if(!usuario && tipoOperacao == 'Retirada'){
         registrarRetirada(tool, dataOperacao);
     } else {
-        const usuario = await User.findOne({ codigo: body.codigo }); 
-
         registrarLog('POST', tool, tipoOperacao, dataOperacao, usuario);
     }
 
