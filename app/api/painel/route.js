@@ -56,13 +56,7 @@ async function registrarRetirada(tool, dataOperacao) {
         text: 'A ferramenta com o nome ' + tool.nome + ' foi retirada sem autenticação às ' + dataOperacao + '!',
     };
 
-    await transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.error('Error sending email: ', error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+    await transporter.sendMail(mailOptions);
 }
 
 export async function POST(req) {
