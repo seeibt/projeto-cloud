@@ -77,23 +77,20 @@ export async function POST(req) {
         return NextResponse.json({message: "Ferramenta não encontrada!"}, {status: 402});
     }
 
-    // Busca a ferramenta pela posição
-    const id = ferramenta.id;
+    const id = ferramenta.id; 
     const tipoOperacao = body.tipoOperacao;
 
     const dataOperacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
     const tool = await Tools.findByIdAndUpdate(id, { dataOperacao, tipoOperacao});
 
-    if(!body.codigo && tipoOperacao == 'Retirada'){
+    const usuario = await User.findOne({ codigo: body.codigo });
+
+    if(!usuario && tipoOperacao == 'Retirada'){
         registrarRetirada(tool, dataOperacao);
+
+        return NextResponse.json({message: "Usuário não encontrado!"}, {status: 403});
     } else {
-        const usuario = await User.findOne({ codigo: body.codigo }); 
-
-        if(!usuario){
-            return NextResponse.json({message: "Usuário não encontrado!"}, {status: 403});
-        }
-
         registrarLog('POST', tool, tipoOperacao, dataOperacao, usuario);
     }
 
