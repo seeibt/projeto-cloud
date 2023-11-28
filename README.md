@@ -21,4 +21,4 @@ A divulgação do projeto entre os usuários e a coleta de feedbacks foram funda
 
 ### About
 ---
-Desenvolvido utilizando o Node.js versão 13.4.6
+Desenvolvido utilizando o Next.js versão 13.4.6
